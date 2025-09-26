@@ -1,0 +1,212 @@
+;; ESS Technology, Inc INF file.
+;; Copyright (c) 1996 - 1998. All rights Reserved.
+;; Driver: Maestro-2E v4.05.00.0427
+;; Date: August 25,1998
+
+[Version]
+Signature="$Windows 95$"
+Class=MEDIA
+provider=%PT%
+LayoutFile=layout.inf
+
+[ControlFlags]
+ExcludeFromSelect=*PTA0001
+ExcludeFromSelect=*AGG0002
+
+[ClassInstall]
+AddReg=Class.AddReg
+
+[Class.AddReg]
+HKR,,,,%MediaClassName%
+HKR,,Icon,,"0"
+HKR,,Installer,,mmci.dll
+
+[Manufacturer]
+%MfgName%=ESSTech
+
+[ESSTech]
+%*AGGENUM.DeviceDesc%=AGGENUM_Device, *PTA0001
+%*AGGMF.DeviceDesc%=AGGMF_Device, PCI\VEN_125D&DEV_1978&SUBSYS_001014AF
+
+;---------------------------------------------------------------;
+[AGGWTSYNTH_Device]
+
+;---------------------------------------------------------------;
+[AGGMF_Device]
+DelReg=AGOGO.DelReg
+LogConfig=AGOGO.LC
+AddReg=AGOGOMF.Reg
+CopyFiles=AGOGO.CopyList,AGOGOGIC.CopyList,AGOGODOS.CopyList,CRL.CopyList,AGOGOINF.CopyList
+
+DelFiles=AGOGO.DelList
+
+UpdateCfgSys= AGOGOConfig
+UpdateAutoBat=AGOGOAuto
+
+[AGOGOConfig]
+DevDelDev=AECU.SYS
+DevDelDev=AGOGO.SYS
+DevDelDev=AGOGO.COM
+DevDelDev=AGOGOXP.SYS
+DevDelDev=AGOGOXP.COM
+
+[AGOGOAuto]
+CmdDelete=AGOGO
+CmdDelete=AGOGOXP
+CmdDelete=MAESTRO
+
+[AGOGOMF.Reg]
+HKR,,Driver,,esmgr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,,Enumerator,,*CONFIGMG
+HKR,,DeviceDriver,,esmgr.vxd
+HKR,,JoystickSupport,1,01,00
+HKR,,SBFMSupport,1,01,00
+HKR,,MPU401Support,1,01,00
+HKR,,NBMPU401Off,1,00,00
+HKR,,NBGAMEPORTOff,1,00,00
+HKR,,GPIOVal_BM,1,09,00
+HKR,,GPIOVal_NOBM,1,09,00
+
+; The way of how to control the external amplifier
+; 0 = no implementation, 1 = M2/E GPIO1, 2 = PIIX4 GPIO29
+HKR,,"TurnOnOffExtAmp",01,01,00
+
+; South Bridge (PIIX4) GPIO Data Port to control the external amplifier
+HKR,,"SBGPIOData",01,37,40
+
+; Change 01 to 00 to enable PR3, Analog Mixer Powerdown, state
+; Disable PR3, Analog Mixer Powerdown, state
+HKR,,"DisablePR3State",01,01,00
+
+; Change 00 to 01 to disable Hardware Volume Control
+HKR,,"DisableHWVolCtrl",01,01,00
+
+;---------------------------------------------------------------;
+[AGGENUM_Device]
+AddReg=AGGENUM.Reg
+
+[AGGENUM.Reg]
+HKR,,Driver,,esenum.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,,Enumerator,,esenum.vxd
+
+;---------------------------------------------------------------;
+[AGOGO.CopyList]
+es197x.vxd,,
+es197x.drv,,
+esmgr.vxd,,
+mstrsbp.vxd,,
+mstr401.vxd,,
+mstr401.drv,,
+esenum.vxd,,
+ISIS.drv,,
+Gstage.vxd,,
+VJOYD.VXD,,
+MSJSTICK.DRV,,
+_chkdsk.exe,,,2
+
+[AGOGOGIC.CopyList]
+isis.bin,,
+pci64.bin,,
+bank4m.94b,,
+ClrISIS.exe,,
+
+[CRL.CopyList]
+audio3d.dll,,
+a3d.dll,,
+crlp3d.exe,,
+crlp3d.txt,,
+
+[AGOGOINF.CopyList]
+MSTROWT.INF,,
+
+[AGOGODOS.CopyList]
+MAESTRO.COM,,
+AECU.SYS,,
+
+;---------------------------------------------------------------;
+[AGOGO.DelReg]
+HKLM,%DEL_REG%,AGOGO
+
+
+;---------------------------------------------------------------;
+[AGOGO.LC]
+ConfigPriority=NORMAL
+IOConfig=f00-f1f , f40-f5f, e00-e1f , e40-e5f
+IRQConfig=5, 7, 9, 10
+
+;---------------------------------------------------------------;
+[AGOGO.DelList]
+;qa3dload.dll
+;a3d.dll
+;qa3d.dll
+;qhook.vxd
+
+[PreCopySection]
+HKR,,NoSetupUI,,1
+
+[*AGG0001.Det]
+AddReg=PreCopySection
+
+[AGOGO_Device.FactDef]
+ConfigPriority=NORMAL
+IOConfig=f00-f1f
+IRQConfig=5
+
+;---------------------------------------------------------------;
+
+[DestinationDirs]
+DefaultDestDir = 11     ; LDID_SYS
+AGOGODOS.CopyList=30
+AGOGOINF.CopyList=17
+AGOGOUTI.CopyList=10
+AGOGOGIC.CopyList=10    ; LDID_WIN
+AGOGOLNK.CopyList=10,desktop
+CRL.CopyList=11
+
+[SourceDisksNames]
+1="Maxi Studio ISIS Audio Device Multimedia Disk","MAXIISIS",0001
+
+[SourceDisksFiles]
+esmgr.vxd = 1
+es197x.vxd = 1
+es197x.drv = 1
+mstrsbp.vxd = 1
+mstr401.vxd = 1
+mstr401.drv = 1
+esenum.vxd = 1
+MAESTRO.COM = 1
+AECU.SYS = 1
+audio3d.dll = 1
+a3d.dll = 1
+crlp3d.exe = 1
+crlp3d.txt = 1
+MSTROWT.INF = 1
+VJOYD.VXD = 1
+MSJSTICK.DRV = 1
+ISIS.drv = 1
+Gstage.vxd = 1
+isis.bin = 1
+pci64.bin = 1
+bank4m.94b = 1
+ClrISIS.exe =1
+_chkdsk.EXE = 1
+MSTROWT.INF = 1
+
+;---------------------------------------------------------------;
+
+[Strings]
+;Non-localized strings
+KEY_WARNVER="SYSTEM\CurrentControlSet\Control\SessionManager\WarnVerDLLs"
+KEY_CHKVER="SYSTEM\CurrentControlSet\Control\SessionManager\CheckVerDLLs"
+DEL_REG="SYSTEM\CurrentControlSet\Services\Class\AGOGO"
+
+;Localized strings
+PT="Guillemot, Corp."
+MfgName="Guillemot, Corp."
+*AGGMF.DeviceDesc="Maxi Studio ISIS Device Manager"
+*AGGENUM.DeviceDesc="Maxi Studio ISIS Multi-Device Enumerator"
+MediaClassName="ESS Media Device Controllers"
