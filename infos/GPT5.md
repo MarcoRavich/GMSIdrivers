@@ -1,22 +1,22 @@
-Here is a compact, driver-oriented extract of what is known and where to get the missing details.
+# A compact, driver-oriented extract of what is known and where to get the missing details.
 
-ESS ES1978MS (Maestro-2EM / Maestro-2E, PCI)
-• Bus and IDs: PCI multimedia audio, Vendor 0x125d, Device 0x1978. Seen and supported in BSD/Linux IDs. ([bsd-hardware.info][1])
-• Architecture (from Linux driver comments): 64 APUs, WaveCache DMA engine, on-chip ASSP DSP, AC’97 codec link(s). PCM goes PCI→WaveCache→APUs→AC’97; capture uses input APU + rate-converter APU then DMA to RAM. WaveCache can only address 28-bit physical addresses; allocations must fit in a single 4 MiB window. ([codebrowser.dev][2])
-• Legacy/aux blocks exposed by config registers: gameport, FM, SB-compat, MPU-401 UART, GPIO, serial IRQ; enable bits and “legacy audio control” flags are defined in driver. ([codebrowser.dev][2])
-• Power management: device has quirky PM; mainstream driver keeps an allowlist and can disable PM on unsupported subsystems. ([codebrowser.dev][2])
-• IRQ enable and MIDI: host IRQ bits include DSIE, HW volume, optional MPU-401; MPU UART is usually at io_base + ESM_MPU401_PORT. ([codebrowser.dev][2])
-• Codec interface: almost always standard AC’97 codecs; mixer and variable-rate via AC’97 registers. Use the AC’97 2.2/2.3 spec for AC-link framing, slot enables, cold/warm reset, VRA, power states. ([codebrowser.dev][2])
-• Open drivers to study/port:
-– Linux ALSA: snd-es1968 (sound/pci/es1968.c). Contains register maps, init sequence, DMA setup, APU programming, PM, MPU/gameport glue. This is the primary, working, modern reference. ([GitHub][3])
-– NetBSD esm(4) and OpenBSD maestro(4) manpages for device scope and OS-level behaviors. ([Manuale NetBSD][4])
-• Vendor drivers (for reverse-engineering firmware tables and mixer defaults): Windows 9x/NT/XP packages exist. ([The Retro Web][5])
+## ESS ES1978MS (Maestro-2EM / Maestro-2E, PCI)
+- Bus and IDs: PCI multimedia audio, Vendor 0x125d, Device 0x1978. Seen and supported in BSD/Linux IDs. ([bsd-hardware.info][1])
+- Architecture (from Linux driver comments): 64 APUs, WaveCache DMA engine, on-chip ASSP DSP, AC’97 codec link(s). PCM goes PCI→WaveCache→APUs→AC’97; capture uses input APU + rate-converter APU then DMA to RAM. WaveCache can only address 28-bit physical addresses; allocations must fit in a single 4 MiB window. ([codebrowser.dev][2])
+- Legacy/aux blocks exposed by config registers: gameport, FM, SB-compat, MPU-401 UART, GPIO, serial IRQ; enable bits and “legacy audio control” flags are defined in driver. ([codebrowser.dev][2])
+- Power management: device has quirky PM; mainstream driver keeps an allowlist and can disable PM on unsupported subsystems. ([codebrowser.dev][2])
+- IRQ enable and MIDI: host IRQ bits include DSIE, HW volume, optional MPU-401; MPU UART is usually at io_base + ESM_MPU401_PORT. ([codebrowser.dev][2])
+- Codec interface: almost always standard AC’97 codecs; mixer and variable-rate via AC’97 registers. Use the AC’97 2.2/2.3 spec for AC-link framing, slot enables, cold/warm reset, VRA, power states. ([codebrowser.dev][2])
+- Open drivers to study/port:
+   - Linux ALSA: snd-es1968 (sound/pci/es1968.c). Contains register maps, init sequence, DMA setup, APU programming, PM, MPU/gameport glue. This is the primary, working, modern reference. ([GitHub][3])
+   - NetBSD esm(4) and OpenBSD maestro(4) manpages for device scope and OS-level behaviors. ([Manuale NetBSD][4])
+   - Vendor drivers (for reverse-engineering firmware tables and mixer defaults): Windows 9x/NT/XP packages exist. ([The Retro Web][5])
 
-What you can implement safely from public sources
-• PCI probe and BAR/iobase mapping; IRQ handler; WaveCache/PCM engine init (see snd_es1968_chip_init, playback/capture setup); APU register programming; AC’97 reset, read/write, VRA, power; MPU-401 UART subdevice; optional gameport. ([codebrowser.dev][6])
-• Known constraints: 28-bit DMA addressing and 4 MiB window constraint; allocate DMA buffers accordingly or use IOMMU/bounce buffers. ([codebrowser.dev][2])
+## What you can be implemented safely from public sources
+- PCI probe and BAR/iobase mapping; IRQ handler; WaveCache/PCM engine init (see snd_es1968_chip_init, playback/capture setup); APU register programming; AC’97 reset, read/write, VRA, power; MPU-401 UART subdevice; optional gameport. ([codebrowser.dev][6])
+- Known constraints: 28-bit DMA addressing and 4 MiB window constraint; allocate DMA buffers accordingly or use IOMMU/bounce buffers. ([codebrowser.dev][2])
 
-Key documents/resources
+## Key documents/resources
 • Linux kernel source snd-es1968 and Kconfig help for device IDs and options. ([GitHub][3])
 • AC’97 spec rev 2.2/2.3 for codec programming and AC-link timing. ([Alsa Project][7])
 • BSD manpages for alternative initialization details. ([Manuale NetBSD][4])
