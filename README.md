@@ -1,8 +1,4 @@
-I'll analyze the Guillemot MAXI Studio ISIS PCI soundcard driver to understand its architecture and functionality, then help you create a more modern version.
-
-Let me start by exploring the contents of the Win95 folder:Now let me examine the key configuration files to understand the driver structure better:# Analysis of Guillemot Maxi Studio ISIS PCI Soundcard Driver
-
-Based on my analysis of the Win95 folder contents, this is a comprehensive retroactive driver package for the **Guillemot Maxi Studio ISIS PCI soundcard**. Here's what I've discovered:
+Based on Copilot's analysis of the Win95 folder contents, this is a comprehensive retroactive driver package for the **Guillemot Maxi Studio ISIS PCI soundcard**.
 
 ## Driver Architecture
 
