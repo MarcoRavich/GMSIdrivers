@@ -94,7 +94,7 @@ Collect every file in the driver package: EXE, CAB, INF, SYS, VxD, VXD, DLL, COM
    - Correlate traces to disassembly and build register map.
 
 ### Tools summary (Win9x-focused)
-- Static: Ghidra (16-bit support), rizin/radare2, RetDec, strings, [binwalk](https://github.com/ReFirmLabs/binwalk), 7z, cabextract.
-- Dynamic/Emulation: Bochs, QEMU (full-system), VM snapshots.
-- Legacy monitoring: FileMon ([mirror](https://www.softpedia.com/get/Programming/Other-Programming-Files/Filemon.shtml)) / RegMon ([mirror](https://www.softpedia.com/get/Programming/Other-Programming-Files/Regmon.shtml)) for Win9x installers. SoftICE only as last-resort and with legal check.
+- Static: [Ghidra](https://github.com/NationalSecurityAgency/ghidra#readme) (16-bit support), [rizin](https://rizin.re/)/[radare2](https://rada.re/n/radare2.html), [RetDec](https://github.com/avast/retdec), strings, [binwalk](https://github.com/ReFirmLabs/binwalk), [7z](https://7-zip.org/download.html), [cabextract](https://www.cabextract.org.uk/).
+- Dynamic/Emulation: [Bochs](https://bochs.sourceforge.io/), [QEMU](https://www.qemu.org/download/) (full-system), VM snapshots.
+- Legacy monitoring: FileMon ([mirror](https://www.softpedia.com/get/Programming/Other-Programming-Files/Filemon.shtml)) / RegMon ([mirror](https://www.softpedia.com/get/Programming/Other-Programming-Files/Regmon.shtml)) for Win9x installers. [SoftICE](https://archive.org/details/NuMega_SoftIce_Windows_3.2_2) only as last-resort and with legal check.
 - Development: Python for parsers/harness, git, hex editors.
