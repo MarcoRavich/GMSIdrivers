@@ -94,7 +94,7 @@ Collect every file in the driver package: EXE, CAB, INF, SYS, VxD, VXD, DLL, COM
    - Correlate traces to disassembly and build register map.
 
 ### Tools summary (Win9x-focused)
-- Static: Ghidra (16-bit support), rizin/radare2, RetDec, strings, binwalk, 7z, cabextract.
+- Static: Ghidra (16-bit support), rizin/radare2, RetDec, strings, [binwalk](https://github.com/ReFirmLabs/binwalk), 7z, cabextract.
 - Dynamic/Emulation: Bochs, QEMU (full-system), VM snapshots.
 - Legacy monitoring: FileMon/RegMon for Win9x installers. SoftICE only as last-resort and with legal check.
 - Development: Python for parsers/harness, git, hex editors.
